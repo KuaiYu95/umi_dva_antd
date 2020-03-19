@@ -82,13 +82,43 @@ export default {
       routes: [
         {
           path: '/',
-          redirect: '/welcome',
+          redirect: '/user-center',
         },
         {
-          path: '/welcome',
-          name: 'welcome',
-          icon: 'smile',
-          component: './Welcome',
+          name: '用户中心',
+          icon: 'robot',
+          path: '/user-center',
+          component: './UserCenter',
+        },
+        {
+          name: '博客分享',
+          icon: 'file-markdown',
+          path: '/blog-enjoy',
+          component: './BlogEnjoy',
+        },
+        {
+          name: '日星月记',
+          icon: 'book',
+          path: '/diary',
+          component: './Diary',
+        },
+        {
+          name: 'Map 足迹',
+          icon: 'environment',
+          path: '/atlas',
+          component: './Atlas',
+        },
+        {
+          name: '代办事项',
+          icon: 'carry-out',
+          path: '/todos',
+          component: './Todos',
+        },
+        {
+          name: '留言板块',
+          icon: 'calendar',
+          path: '/message',
+          component: './Message',
         },
         {
           component: './404',
