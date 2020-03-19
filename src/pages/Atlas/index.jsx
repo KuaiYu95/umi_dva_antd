@@ -1,20 +1,22 @@
 import React from 'react';
-import { Spin } from 'antd';
+import BlockLoading from '@/components/BlockLoading/index';
+import { Empty } from 'antd';
 import styles from './index.less';
 
 export default class UserCenter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: false,
     }
   }
 
   render() {
-    let { loading } = this.state
+    const { loading } = this.state
     return (
       <div style={{ paddingTop: 100, textAlign: 'center' }}>
-        <Spin spinning={loading} size="large" />
+        <Empty />
+        <BlockLoading loading={loading} />
       </div>
     )
   }

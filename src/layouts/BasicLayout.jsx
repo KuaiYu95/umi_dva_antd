@@ -59,7 +59,6 @@ const BasicLayout = props => {
         if (menuItemProps.isUrl || menuItemProps.children || !menuItemProps.path) {
           return defaultDom;
         }
-
         return <Link to={menuItemProps.path}>{defaultDom}</Link>;
       }}
       breadcrumbRender={(routers = []) => [
@@ -91,7 +90,8 @@ const BasicLayout = props => {
   );
 };
 
-export default connect(({ global, settings }) => ({
+export default connect(({ global, settings, blog }) => ({
   collapsed: global.collapsed,
   settings,
+  blogDetail: blog.blogDetail
 }))(BasicLayout);

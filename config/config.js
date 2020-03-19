@@ -91,6 +91,14 @@ export default {
           component: './UserCenter',
         },
         {
+          path: '/blog-enjoy/blog-detail',
+          component: './BlogDetail',
+        },
+        {
+          path: '/blog-enjoy/post-blog',
+          component: './PostBlog',
+        },
+        {
           name: '博客分享',
           icon: 'file-markdown',
           path: '/blog-enjoy',
