@@ -13,7 +13,7 @@ class BlogEnjoy extends React.Component {
     super(props);
     this.state = {
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 5,
       searchSort: '0',
       searchValue: '',
       searchType: '',
@@ -65,10 +65,7 @@ class BlogEnjoy extends React.Component {
   }
 
   render() {
-    const { loading, totalItems, searchSort, searchType, pageSize, blogList } = this.state
-    const blogType = [
-      'HTML / CSS', 'JS / TS', 'React及其周边技术栈', '各端小程序开发', '移动端 H5', 'webpack', '其他技术框架', '数据库', '数据结构与算法', '开发工具', '计算机网络', '其他'
-    ]
+    const { loading, totalItems, searchSort, pageSize, blogList } = this.state
     return (
       !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
         <div className={styles.tabLine}>
@@ -81,12 +78,6 @@ class BlogEnjoy extends React.Component {
             <Option value="1">最多评论 </Option>
             <Option value="3">最多查看 </Option>
           </Select>
-          <Select defaultValue={searchType} style={{ width: 400 }} onChange={this.handleSelectSort}>
-            <Option value="">全部 </Option>
-            {blogType.map(it => {
-              return <Option key={it}>{it}</Option>
-            })}
-          </Select>
         </div>
         {(blogList.length > 0 ? blogList.map(item => {
           const isUploadTime = item.uploadTime === item.lastModifyTime
@@ -95,7 +86,7 @@ class BlogEnjoy extends React.Component {
             <div className={styles.blogHeader}>
               <Link to={`/blog-enjoy/blog-detail?id=${item._id}`}><div className={styles.blogTitle}><Icon type="medium" /> {item.title}</div></Link>
               <div className={styles.blogTags}>{item.typeIds.map(it => {
-                return <span className={styles.blogTagsItem} key={it}><Tag color="#637C8F">{it}</Tag></span>
+                return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#637C8F">{it}</Tag></span> : null
               })}</div>
             </div>
             <div className={styles.blogContent}>{item.text}</div>
