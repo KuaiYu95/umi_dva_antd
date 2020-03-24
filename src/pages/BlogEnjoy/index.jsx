@@ -13,7 +13,7 @@ class BlogEnjoy extends React.Component {
     super(props);
     this.state = {
       currentPage: 1,
-      pageSize: 5,
+      pageSize: 20,
       searchSort: '0',
       searchValue: '',
       searchType: '',

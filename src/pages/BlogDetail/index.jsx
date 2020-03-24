@@ -13,7 +13,6 @@ class BlogDetail extends React.Component {
     this.state = {
       loading: true,
       text: '',
-      title: '',
     }
   }
 
@@ -25,25 +24,29 @@ class BlogDetail extends React.Component {
     }).then(() => {
       const { success, data } = this.props.blogDetail
       if (success) {
-        const { title, text } = data
-        this.setState({ title, text, loading: false })
+        const { text } = data
+        this.setState({ text, loading: false })
       }
     })
   }
 
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: 'blog/setTitle',
+      data: ''
+    })
+  }
+
   render() {
-    const { text, title, loading } = this.state
+    const { text, loading } = this.state
     return (
       !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
+        <div className={styles.toBack}>
+          <Button onClick={
+            () => router.push('/blog-enjoy')
+          }><Icon type="left" /> 返回列表</Button>
+        </div>
         <div className={styles.blogCont}>
-          <div className={styles.toBack}>
-            <Button onClick={
-              () => router.push('/blog-enjoy')
-            }><Icon type="left" /> 返回列表</Button>
-          </div>
-          <div className={styles.info}>
-            <div>{title}</div>
-          </div>
           <div className={styles.markd}>
             <ReactMarkdown
               source={text}

@@ -82,7 +82,7 @@ export default {
       routes: [
         {
           path: '/',
-          redirect: '/user-center',
+          redirect: '/blog-detail',
         },
         {
           name: '用户中心',

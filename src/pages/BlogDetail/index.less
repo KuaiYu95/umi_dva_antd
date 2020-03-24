@@ -1,12 +1,17 @@
+@import '~antd/es/style/themes/default.less';
 .blog {
   height: 100%;
   padding: 24px 0;
+  display: flex;
+  .toBack {
+    display: flex;
+    width: 150px;
+    margin-right: 24px;
+    flex-direction: column;
+  }
   .blogCont {
     overflow: auto;
-    position: relative;
-    .toBack {
-      position: absolute;
-    }
+    flex-grow: 1;
     .info {
       margin: 0 auto 24px;
       div {
@@ -25,9 +30,11 @@
       }
   
       blockquote {
-        height: 30px;
-        line-height: 30px;
+        height: 40px;
+        line-height: 40px;
         padding-left: 10px;
+        font-size: 18px;
+        font-weight: 500;
         background-color: #ECF1FC;
         border-left: 5px solid #DE463C;
         p {
@@ -36,7 +43,54 @@
       }
   
       img {
-        max-width: 760px;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .blog {
+    height: 100%;
+    padding: 24px 0;
+    .toBack {
+      display: none
+    }
+    .blogCont {
+      overflow: auto;
+      .info {
+        margin: 0 auto 24px;
+        div {
+          font-size: 24px;
+          text-align: center;
+          font-weight: 300;
+        }
+      }
+      .markd {
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+    
+        a {
+          color: #DE463C;
+        }
+    
+        blockquote {
+          height: 40px;
+          line-height: 40px;
+          padding-left: 10px;
+          font-size: 18px;
+          font-weight: 500;
+          background-color: #ECF1FC;
+          border-left: 5px solid #DE463C;
+          p {
+            color: #7C7C7C;
+          }
+        }
+    
+        img {
+          max-width: 100%;
+        }
       }
     }
   }

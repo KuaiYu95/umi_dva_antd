@@ -5,7 +5,8 @@ const BlogModel = {
   state: {
     blogLists: [],
     blogDetail: {},
-    addBlogInfo: {}
+    addBlogInfo: {},
+    blogTitle: '',
   },
   effects: {
     *queryGetBlog(payload, { call, put }) {
@@ -22,6 +23,13 @@ const BlogModel = {
         payload: response,
       });
     },
+    *setBlogTitle(payload, { call, put }) {
+      console.log(payload, 2)
+      yield put({
+        type: 'setTitle',
+        data: payload.data,
+      });
+    },
     *queryAddBlog(payload, { call, put }) {
       const response = yield call(queryAddBlog, payload);
       yield put({
@@ -35,7 +43,12 @@ const BlogModel = {
       return { ...state, blogLists: action.payload || [] };
     },
     getBlogDetail(state, action) {
-      return { ...state, blogDetail: action.payload || {} };
+      return { ...state, blogDetail: action.payload || {}, blogTitle: action.payload ? action.payload.data.title : '' };
+    },
+    setTitle(state, action) {
+      const _state = JSON.parse(JSON.stringify(state));
+      _state.blogTitle = action.data
+      return _state
     },
     addBlog(state, action) {
       return { ...state, addBlogInfo: action.payload || {} };
