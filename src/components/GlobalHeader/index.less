@@ -80,12 +80,26 @@
   }
 }
 
+.myInfo {
+  font-weight: 800;
+  background-color: #000;
+  color: #fff;
+  transform: rotate(45deg);
+  width: 128px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  margin-top: 15px;
+  margin-right: -10px;
+  display: inline-block;
+}
+
 @media only screen and (max-width: @screen-md) {
   :global(.ant-divider-vertical) {
     vertical-align: unset;
   }
-  .name {
-    display: none;
+  .myInfo {
+    margin-right: -30px;
   }
   .right {
     position: absolute;

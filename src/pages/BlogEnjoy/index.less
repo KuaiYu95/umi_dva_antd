@@ -1,3 +1,5 @@
+@import '~antd/es/style/themes/default.less';
+
 .blog {
   height: 100%;
   .tabLine {
@@ -12,6 +14,9 @@
       padding: 4.5px;
       border-radius: 4px;
       background-color: #fff;
+    }
+    .selectSort {
+      width: 400px;
     }
     >* {
       margin: 0 5px;
@@ -83,5 +88,42 @@
         float: right;
       }
     }
+  }
+}
+
+@media only screen and (max-width: @screen-md) {
+  .blog {
+    .tabLine {
+      .selectSort {
+        width: 160px;
+      }
+    }
+    .blogContain {
+      .blogHeader {
+        height: auto;
+        line-height: none;
+        .blogTitle {
+          width: 300px;
+        }
+        .blogTags {
+          margin-left: 0;
+          margin-top: -20px;
+          height: auto;
+          line-height: none;
+        }
+      }
+      .blogContent {
+        margin: 0 0 5px;
+      }
+      .blogFooter {
+        .blogTimestamp {
+          margin-top: 5px;
+          float: left;
+        }
+      }
+    }
+  }
+  .link {
+    display: none;
   }
 }

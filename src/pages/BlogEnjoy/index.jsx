@@ -69,9 +69,9 @@ class BlogEnjoy extends React.Component {
     return (
       !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
         <div className={styles.tabLine}>
-          <Link to='/blog-enjoy/post-blog'><Button type="primary">发布博客 <Icon type="right" /></Button></Link>
+          <Link className={styles.link} to='/blog-enjoy/post-blog'><Button type="primary">发布博客 <Icon type="right" /></Button></Link>
           <Search placeholder="搜索" onSearch={this.onSearch} />
-          <Select defaultValue={searchSort} style={{ width: 400 }} onChange={this.handleSearchSort}>
+          <Select className={styles.selectSort} defaultValue={searchSort} onChange={this.handleSearchSort}>
             <Option value="0">最近更新 </Option>
             <Option value="2">最多点赞 </Option>
             <Option value="4">最多收藏 </Option>
