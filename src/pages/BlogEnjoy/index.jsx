@@ -3,6 +3,7 @@ import BlockLoading from '@/components/BlockLoading/index';
 import { Button, Icon, Tag, Divider, Pagination, Input, Select, message, Empty } from 'antd';
 import { Link } from 'umi';
 import { connect } from 'dva';
+import router from 'umi/router';
 import moment from 'moment';
 import styles from './index.less';
 
@@ -64,6 +65,33 @@ class BlogEnjoy extends React.Component {
     })
   }
 
+  toBlogDetail(_id) {
+    this.props.dispatch({
+      type: 'blog/queryAddBlogView',
+      payload: { _id }
+    }).finally(() => {
+      router.push(`/blog-enjoy/blog-detail?id=${_id}`);
+    })
+  }
+
+  handleClickLike(_id) {
+    this.props.dispatch({
+      type: 'blog/queryAddBlogLike',
+      payload: { _id }
+    }).then(() => {
+      const list = []
+      this.state.blogList.forEach(it => {
+        if (it._id === _id) {
+          const { likeCount } = it
+          list.push({...it, likeCount: likeCount + 1})
+        } else {
+          list.push(it)
+        }
+      })
+      this.setState({ blogList: list })
+    })
+  }
+
   render() {
     const { loading, totalItems, searchSort, pageSize, blogList } = this.state
     return (
@@ -84,25 +112,27 @@ class BlogEnjoy extends React.Component {
           const time = moment(+item.lastModifyTime).format('YYYY-MM-DD kk:mm:ss')
           return <div className={styles.blogContain} style={{ margin: '16px auto 0' }} key={item._id}>
             <div className={styles.blogHeader}>
-              <Link to={`/blog-enjoy/blog-detail?id=${item._id}`}><div className={styles.blogTitle}><Icon type="medium" /> {item.title}</div></Link>
+              <Link to={`/blog-enjoy/blog-detail?id=${item._id}`}>
+                <div className={styles.blogTitle} onClick={() => this.toBlogDetail(item._id)}><Icon type="medium" /> {item.title}</div>
+              </Link>
               <div className={styles.blogTags}>{item.typeIds.map(it => {
                 return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#637C8F">{it}</Tag></span> : null
               })}</div>
             </div>
             <div className={styles.blogContent}>{item.text}</div>
             <div className={styles.blogFooter}>
-              <div className={styles.blogStatistic} onClick={() => message.warning('开发中，尽情期待吧')}>
-                <span>
+              <div className={styles.blogStatistic}>
+                <span onClick={() => this.handleClickLike(item._id)}>
                   <Icon type="like" />
                   <span className={styles.count}>{item.likeCount}</span>
                 </span>
                 <Divider type="vertical" />
-                <span>
+                <span onClick={() => message.warning('开发中，尽情期待吧')}>
                   <Icon type="star" />
                   <span className={styles.count}>{item.collectCount}</span>
                 </span>
                 <Divider type="vertical" />
-                <span>
+                <span onClick={() => message.warning('开发中，尽情期待吧')}>
                   <Icon type="message" />
                   <span className={styles.count}>{item.commentCount}</span>
                 </span>

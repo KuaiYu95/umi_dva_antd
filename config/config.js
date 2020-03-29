@@ -82,7 +82,7 @@ export default {
       routes: [
         {
           path: '/',
-          redirect: '/blog-detail',
+          redirect: '/blog-enjoy',
         },
         {
           name: '用户中心',
@@ -97,6 +97,10 @@ export default {
         {
           path: '/blog-enjoy/post-blog',
           component: './PostBlog',
+        },
+        {
+          path: '/blog-enjoy/blog-edit',
+          component: './BlogEdit',
         },
         {
           name: '博客分享',

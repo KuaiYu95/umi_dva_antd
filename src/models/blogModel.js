@@ -1,4 +1,4 @@
-import { queryGetBlog, queryGetBlogDetail, queryAddBlog } from '@/services/index';
+import { queryGetBlog, queryGetBlogDetail, queryAddBlog, queryAddBlogView, queryAddBlogLike, queryDelBlog, queryUpdateBlog } from '@/services/index';
 
 const BlogModel = {
   namespace: 'blog',
@@ -16,6 +16,20 @@ const BlogModel = {
         payload: response,
       });
     },
+    *queryAddBlogView(payload, { call, put }) {
+      const response = yield call(queryAddBlogView, payload);
+      yield put({
+        type: 'getBlogViewCount',
+        payload: response,
+      });
+    },
+    *queryAddBlogLike(payload, { call, put }) {
+      const response = yield call(queryAddBlogLike, payload);
+      yield put({
+        type: 'getBlogLikeCount',
+        payload: response,
+      });
+    },
     *queryGetBlogDetail(payload, { call, put }) {
       const response = yield call(queryGetBlogDetail, payload);
       yield put({
@@ -24,7 +38,6 @@ const BlogModel = {
       });
     },
     *setBlogTitle(payload, { call, put }) {
-      console.log(payload, 2)
       yield put({
         type: 'setTitle',
         data: payload.data,
@@ -34,6 +47,20 @@ const BlogModel = {
       const response = yield call(queryAddBlog, payload);
       yield put({
         type: 'addBlog',
+        payload: response,
+      });
+    },
+    *queryDelBlog(payload, { call, put }) {
+      const response = yield call(queryDelBlog, payload);
+      yield put({
+        type: 'delBlog',
+        payload: response,
+      });
+    },
+    *queryUpdateBlog(payload, { call, put }) {
+      const response = yield call(queryUpdateBlog, payload);
+      yield put({
+        type: 'updateBlog',
         payload: response,
       });
     },
@@ -52,6 +79,18 @@ const BlogModel = {
     },
     addBlog(state, action) {
       return { ...state, addBlogInfo: action.payload || {} };
+    },
+    delBlog(state, action) {
+      return { ...state, blogDetail: action.payload || {} };
+    },
+    updateBlog(state, action) {
+      return { ...state, blogDetail: action.payload || {} };
+    },
+    getBlogViewCount(state, action) {
+      return { ...state, blogDetail: action.payload || {} };
+    },
+    getBlogLikeCount(state, action) {
+      return { ...state, blogDetail: action.payload || {} };
     },
   },
 };

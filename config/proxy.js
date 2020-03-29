@@ -8,7 +8,8 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://localhost:8080',
+      target: 'http://localhost:80',
+      // target: 'http://www.kuaiyu.site',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
@@ -17,7 +18,8 @@ export default {
   },
   test: {
     '/api/': {
-      target: 'http://localhost:8080',
+      target: 'http://localhost:80',
+      // target: 'http://www.kuaiyu.site',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
@@ -26,7 +28,8 @@ export default {
   },
   pre: {
     '/api/': {
-      target: 'http://localhost:8080',
+      target: 'http://localhost:80',
+      // target: 'http://www.kuaiyu.site',
       changeOrigin: true,
       pathRewrite: {
         '^': '',

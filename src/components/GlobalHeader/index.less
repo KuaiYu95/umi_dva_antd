@@ -83,7 +83,11 @@
 .myInfo {
   display: flex;
   .blogTitle {
-    // width: 100%;
+    font-size: 24px;
+  }
+  .time {
+    padding: 0 24px;
+    color: #333;
   }
   .github {
     font-weight: 800;
@@ -105,11 +109,10 @@
   }
   .myInfo {
     .blogTitle {
-      min-width: 200px;
-      max-width: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      display: none;
+    }
+    .time {
+      // display: none;
     }
     .github {
       display: none;
