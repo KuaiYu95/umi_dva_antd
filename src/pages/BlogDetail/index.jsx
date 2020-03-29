@@ -7,6 +7,7 @@ import { Link } from 'umi';
 import router from 'umi/router';
 import { connect } from 'dva';
 import styles from './index.less';
+import util from '@/utils/utils';
 
 class BlogDetail extends React.Component {
   constructor(props) {
@@ -26,19 +27,43 @@ class BlogDetail extends React.Component {
   }
 
   componentDidMount() {
-    const id = window.location.href.split('id=')[1]
+    const { id } = util.query()
+    this.getBlogDetail(id)
+  }
+
+  toOtherBlog(id) {
+    const { _id } = this.state
+    if (_id !== id) {
+      this.getBlogDetail(id, 1)
+    }
+  }
+
+  addView(id) {
+    this.props.dispatch({
+      type: 'blog/queryAddBlogView',
+      payload: { _id: id }
+    }).then(() => {
+      const { data } = this.props.blogDetail
+      this.setState({ ...data })
+    })
+  }
+
+  getBlogDetail(id, type) {
     this.setState({ loading: true }, () => {
       this.props.dispatch({
         type: 'blog/queryGetBlogDetail',
-        payload: { _id: id },
+        payload: { _id: id, type: 1 },
       }).then(() => {
         const { success, data } = this.props.blogDetail
         if (success) {
-          const { text, commentCount, likeCount, collectCount, viewCount, _id, title, typeIds } = data
-          this.setState({ text, loading: false, commentCount, likeCount, collectCount, viewCount, _id, title, typeIds })
+          this.setState({ ...data, loading: false }, () => {
+            if (type === 1) {
+              this.addView(id)
+            }
+          })
           this.props.dispatch({
             type: 'blog/queryGetBlog',
-            payload: { currentPage: 1, pageSize: 20, searchSort: 0, searchValue: '', searchType: '', type: typeIds },
+            payload: { currentPage: 1, pageSize: 20, searchSort: 0, searchValue: '', searchType: '', type: data.typeIds, id },
           }).then(() => {
             if (this.props.blogLists.success) {
               this.setState({ blogList: this.props.blogLists.data })
@@ -58,7 +83,7 @@ class BlogDetail extends React.Component {
 
   render() {
     const { text, loading, commentCount, likeCount, collectCount, viewCount, _id, title, typeIds, blogList } = this.state
-    const renderHeader = (t) => (
+    const renderHeader = t => (
       <div className={styles.avatarUser}>
         <Avatar size="small" src="https://front-images.oss-cn-hangzhou.aliyuncs.com/i4/5b019b627dcc672321b168667d7337e0-88-88.gif" />
         <span className={styles.username}>{t}</span>
@@ -105,7 +130,7 @@ class BlogDetail extends React.Component {
                 }
               }><Icon type="delete" /> 删除</Button>
               <Button type="link" size="small" className={styles.btnItem} onClick={
-                () => this.componentDidMount()
+                () => this.getBlogDetail(_id)
               }><Icon type="redo" /> 刷新</Button>
             </div>
           </div>
@@ -122,8 +147,8 @@ class BlogDetail extends React.Component {
             {renderHeader('相关推送')}
             <div className={styles.blogItem}>
               {blogList.map(item => {
-                return <div>
-                  <Icon type="link" /> 
+                return <div key={item._id} onClick={() => this.toOtherBlog(item._id)}>
+                  <Icon type="link" />
                   <span><Link to={`/blog-enjoy/blog-detail?id=${item._id}`}>{item.title}</Link></span>
                 </div>
               })}
