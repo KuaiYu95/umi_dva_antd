@@ -1,6 +1,7 @@
 import request from '@/utils/request';
-import { stringify, parse } from 'qs';
+import { stringify } from 'qs';
 
+// 博客
 export async function queryGetBlog(params) {
   return request(`/api/get-blog?${stringify(params.payload)}`);
 }
@@ -30,6 +31,18 @@ export async function queryUpdateBlog(params) {
 
 export async function queryAddBlog(params) {
   return request('/api/add-blog', {
+    method: 'POST',
+    data: { ...params.payload }
+  });
+}
+
+// 足迹
+export async function queryGetAtlas() {
+  return request(`/api/get-atlas`);
+}
+
+export async function queryAddAtlas(params) {
+  return request(`/api/add-atlas`, {
     method: 'POST',
     data: { ...params.payload }
   });

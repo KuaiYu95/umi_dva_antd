@@ -1,6 +1,45 @@
 @import '~antd/es/style/themes/default.less';
 
-.main {
+.map {
+  height: calc(~"100vh - 64px - 48px");
+  float: left;
+  .wrap {
+    white-space: inherit;
+  }
+}
+.tag {
   width: 100%;
-  background: @component-background;
+  margin-bottom: 5px;
+  opacity: 0.8;
+  overflow: hidden;
+}
+.side {
+  width: 250px;
+  float: right;
+  div {
+    display: flex;
+    align-items: baseline;
+    *:nth-child(2) {
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+
+  }
+}
+.row-input {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  .icon {
+    margin-right: 11px;
+  }
+}
+
+.form-submit {
+  margin-top: 20px;
+  float: right;
+  width: 90%;
 }
