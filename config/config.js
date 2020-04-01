@@ -133,6 +133,12 @@ export default {
           component: './Message',
         },
         {
+        //   name: 'goods',
+        //   icon: 'smile',
+        //   path: '/good-game',
+        //   component: './GoodGame',
+        // },
+        // {
           component: './404',
         },
       ],
