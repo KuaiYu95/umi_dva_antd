@@ -116,7 +116,7 @@ class BlogEnjoy extends React.Component {
                 <div className={styles.blogTitle} onClick={() => this.toBlogDetail(item._id)}><Icon type="medium" /> {item.title}</div>
               </Link>
               <div className={styles.blogTags}>{item.typeIds.map(it => {
-                return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#637C8F">{it}</Tag></span> : null
+                return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#C0CCB1">{it}</Tag></span> : null
               })}</div>
             </div>
             <div className={styles.blogContent}>{item.text}</div>
@@ -143,7 +143,7 @@ class BlogEnjoy extends React.Component {
                 </span>
               </div>
               <div className={styles.blogTimestamp}>
-                <Tag color="#D4DCFC" style={{ color: '#888E9D' }}>
+                <Tag color="#D8E394" style={{ color: '#888E9D' }}>
                   {isUploadTime ? '发布时间：' : '最后更新时间：'}<Icon type="clock-circle" /> {time}
                 </Tag>
               </div>

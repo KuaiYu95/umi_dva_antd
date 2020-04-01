@@ -1,6 +1,6 @@
 export default {
   navTheme: 'light',
-  primaryColor: '#22A9D4',
+  primaryColor: '#81AB49',
   layout: 'sidemenu',
   contentWidth: 'Fluid',
   fixedHeader: true,
@@ -10,7 +10,7 @@ export default {
   menu: {
     locale: false,
   },
-  title: '要什么自行车',
+  title: '闫永娟',
   pwa: false,
   iconfontUrl: '',
 };

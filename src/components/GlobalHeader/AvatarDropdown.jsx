@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
+import { Icon } from 'antd';
 import styles from './index.less';
 
 class AvatarDropdown extends React.Component {
@@ -28,9 +29,9 @@ class AvatarDropdown extends React.Component {
     return (
       <div className={styles.myInfo}>
         {blogTitle && <div className={styles.blogTitle}> 🌲 {blogTitle} 🌲 </div>}
-        <div className={styles.time}>{time}</div>
+        {time && <div className={styles.time}>{time}</div>}
         <div className={styles.github}>
-          <a href="https://github.com/KuaiYu95">Github</a>
+          <a href="https://github.com/juanjuanya">Github</a>
         </div>
       </div>
     )
