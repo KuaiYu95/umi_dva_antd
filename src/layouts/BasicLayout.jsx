@@ -47,7 +47,17 @@ const BasicLayout = props => {
   };
   return (
     <ProLayout
-      logo='https://front-images.oss-cn-hangzhou.aliyuncs.com/i4/1ed3f5200d86aeea49d5ef09bbc33979-32-32.png'
+      logo={<div style={{ 
+        backgroundColor: '#0D0806', 
+        color: '#fff', 
+        fontSize: 18, 
+        fontWeight: 500, 
+        width: 32, 
+        height: 32, 
+        lineHeight: '32px', 
+        textAlign: 'center',
+        borderRadius: 16
+      }}>KY</div>}
       menuHeaderRender={(logoDom, titleDom) => (
         <Link to="/">
           {logoDom}

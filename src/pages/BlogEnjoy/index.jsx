@@ -113,10 +113,10 @@ class BlogEnjoy extends React.Component {
           return <div className={styles.blogContain} style={{ margin: '16px auto 0' }} key={item._id}>
             <div className={styles.blogHeader}>
               <Link to={`/blog-enjoy/blog-detail?id=${item._id}`}>
-                <div className={styles.blogTitle} onClick={() => this.toBlogDetail(item._id)}><Icon type="medium" /> {item.title}</div>
+                <div className={styles.blogTitle} onClick={() => this.toBlogDetail(item._id)}>{item.title}</div>
               </Link>
               <div className={styles.blogTags}>{item.typeIds.map(it => {
-                return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#637C8F">{it}</Tag></span> : null
+                return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#0D0806">{it}</Tag></span> : null
               })}</div>
             </div>
             <div className={styles.blogContent}>{item.text}</div>
@@ -143,7 +143,7 @@ class BlogEnjoy extends React.Component {
                 </span>
               </div>
               <div className={styles.blogTimestamp}>
-                <Tag color="#D4DCFC" style={{ color: '#888E9D' }}>
+                <Tag color="#0D0806" style={{ color: '#fff' }}>
                   {isUploadTime ? '发布时间：' : '最后更新时间：'}<Icon type="clock-circle" /> {time}
                 </Tag>
               </div>

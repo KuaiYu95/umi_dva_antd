@@ -24,7 +24,7 @@
   }
   .blogContain:hover {
     transition: 0.5s;
-    box-shadow: 0 0 4px #3E87E3;
+    box-shadow: 0 0 4px #A0B8DD;
   }
   .blogContain {
     margin: 16px 0;
@@ -33,35 +33,31 @@
     border-radius: 4px;
     transition: 0.5s;
     box-shadow: 0 0 4px #ddd;
-    background-color: #F6F9FC;
+    background-color: #fff;
     cursor: pointer;
     .blogHeader {
-      height: 26px;
-      line-height: 26px;
-      >* {
-        display: inline-block;
-      }
+      // height: 26px;
+      // line-height: 26px;
+      // >* {
+      //   display: inline-block;
+      // }
+      text-align: center;
       .blogTitle {
-        max-width: 400px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        width: 100%;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
         font-size: 16px;
         font-weight: bold;
+        display: block;
         vertical-align: middle;
+        margin-bottom: 20px;
       }
       .blogTags {
-        margin-left: 6px;
-        margin-top: -20px;
-        vertical-align: middle;
+        margin-right: 6px;
+        margin-bottom: 5px;
+        display: block;
       }
-    }
-    .blogSummary {
-      height: 30px;
-      line-height: 30px;
-      font-size: 12px;
-      color: #BF8B2B;
-      text-indent: 2em;
     }
     .blogContent {
       margin: 8px 0 10px;
@@ -75,9 +71,10 @@
       /* autoprefixer: off */ 
       -webkit-box-orient:vertical; 
       /* autoprefixer: on */ 
-      -webkit-line-clamp:2
+      -webkit-line-clamp:4;
     }
     .blogFooter {
+      margin-top: 20px;
       .blogStatistic {
         float: left;
         .count {
@@ -100,24 +97,24 @@
     }
     .blogContain {
       .blogHeader {
-        height: auto;
-        line-height: none;
+        text-align: left;
         .blogTitle {
-          width: 300px;
+          margin-bottom: 0;
         }
         .blogTags {
-          margin-left: 0;
-          margin-top: -20px;
-          height: auto;
-          line-height: none;
+          line-height: 28px;
         }
       }
       .blogContent {
         margin: 0 0 5px;
       }
       .blogFooter {
+        margin-top: 0;
         .blogTimestamp {
           margin-top: 5px;
+          float: left;
+        }
+        .blogStatistic {
           float: left;
         }
       }

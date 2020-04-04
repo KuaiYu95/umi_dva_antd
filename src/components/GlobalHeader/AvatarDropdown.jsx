@@ -7,28 +7,15 @@ class AvatarDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: ''
+      
     }
-  }
-
-  componentDidMount() {
-    setInterval(() => {
-      this.updateTime()
-    }, 1000);
-  }
-
-  updateTime() {
-    const time = moment().format('YYYY-MM-DD kk:mm:ss')
-      this.setState({ time })
   }
 
   render() {
     const { blogTitle } = this.props
-    const { time } = this.state
     return (
       <div className={styles.myInfo}>
-        {blogTitle && <div className={styles.blogTitle}> 🌲 {blogTitle} 🌲 </div>}
-        <div className={styles.time}>{time}</div>
+        {blogTitle && <div className={styles.blogTitle}> {blogTitle} </div>}
         <div className={styles.github}>
           <a href="https://github.com/KuaiYu95">Github</a>
         </div>

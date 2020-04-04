@@ -154,20 +154,20 @@ class Atlas extends React.Component {
     }
     return (
       !loading ? <div className={styles.atlas} style={{ padding: '24px 0' }}>
-        <div className={styles.map} style={{ width: addMap ? 'calc(100% - 266px)' : '100%' }}>
+        <div className={addMap ? styles.map : styles.map2}>
           <Map amapkey='ec5816ac0b3be06896d10712b1c815c2' plugins={plugins} center={this.state.center} zoom={15} events={this.events} >
             <Markers markers={this.state.markers} useCluster={this.state.useCluster} render={this.renderMarkerLayout} events={this.markerEvents} />
             <div style={card}>
               {isCollect && <>
-                <Tag className={styles.tag} color="#000"><Icon type="compass" /> 经度: {longitude}</Tag>
-                <Tag className={styles.tag} color="#000"><Icon type="compass" rotate={90} /> 纬度: {latitude}</Tag>
-                <Tag className={styles.tag} color="#000"><Icon type="search" /> 时间: {moment().format('YYYY-MM-DD')}</Tag>
-                <Tag className={styles.tag} color="#000"><Icon type="environment" /> 地点: {location}</Tag>
-                <Tag className='tag wrap' color="#000"><Icon type="menu" /> 描述: {title}</Tag>
+                <Tag className={styles.tag} color="#0D0806"><Icon type="compass" /> 经度: {longitude}</Tag>
+                <Tag className={styles.tag} color="#0D0806"><Icon type="compass" rotate={90} /> 纬度: {latitude}</Tag>
+                <Tag className={styles.tag} color="#0D0806"><Icon type="search" /> 时间: {moment().format('YYYY-MM-DD')}</Tag>
+                <Tag className={styles.tag} color="#0D0806"><Icon type="environment" /> 地点: {location}</Tag>
+                <Tag className='tag wrap' color="#0D0806"><Icon type="menu" /> 描述: {title}</Tag>
               </>}
               {!isCollect && <>
-                <Tag className={styles.tag} color="#000"><Icon type="compass" /> 经度: {longitude}</Tag>
-                <Tag className={styles.tag} color="#000"><Icon type="compass" rotate={90} /> 纬度: {latitude}</Tag>
+                <Tag className={styles.tag} color="#0D0806"><Icon type="compass" /> 经度: {longitude}</Tag>
+                <Tag className={styles.tag} color="#0D0806"><Icon type="compass" rotate={90} /> 纬度: {latitude}</Tag>
                 <Tag className={styles.tag} color="#888E9D" onClick={this.addMap.bind(this)}><Icon type="plus-circle" /> 未收藏，去添加收藏</Tag>
               </>}
             </div>
