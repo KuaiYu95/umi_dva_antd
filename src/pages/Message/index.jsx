@@ -11,12 +11,11 @@ export default class Message extends React.Component {
   }
 
   render() {
-    let { loading } = this.state
+    const { loading } = this.state
     return (
-      <div style={{ paddingTop: 100, textAlign: 'center' }}>
+      !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
         <Empty />
-        <Spin spinning={loading} size="large" />
-      </div>
+      </div> : <Spin spinning={loading} size="large" />
     )
   }
 }

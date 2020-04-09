@@ -85,7 +85,7 @@ export default {
           redirect: '/blog-enjoy',
         },
         {
-          name: '用户中心',
+          name: '个人中心',
           icon: 'robot',
           path: '/user-center',
           component: './UserCenter',
@@ -133,8 +133,8 @@ export default {
           component: './Message',
         },
         {
-          name: 'goods',
-          icon: 'smile',
+          name: '展览收藏',
+          icon: 'appstore',
           path: '/good-game',
           component: './GoodGame',
         },

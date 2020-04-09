@@ -135,7 +135,7 @@ class BlogDetail extends React.Component {
             </div>
           </div>
           <div className={styles.blogerInfo}>
-            <Descriptions title={renderHeader('野心啵啵')} column={2} size="small">
+            <Descriptions title={renderHeader('数据概览')} column={2} size="small">
               <Descriptions.Item label={<Icon type="like" />}>{likeCount}</Descriptions.Item>
               <Descriptions.Item label={<Icon type="message" />}>{commentCount}</Descriptions.Item>
               <Descriptions.Item label={<Icon type="star" />}>{collectCount}</Descriptions.Item>
