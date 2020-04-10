@@ -155,7 +155,7 @@ class BlogDetail extends React.Component {
             </div>
           </div>}
         </div>
-        <BackTop>
+        <BackTop style={{ right: 50 }}>
           <div className={styles.backTop}>
             <Icon type="caret-up" />
             UP
