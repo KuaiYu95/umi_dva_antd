@@ -14,6 +14,27 @@ const util = {
       })
     }
     return queryUrl
+  },
+  download: (title, text) => {
+    const element = document.createElement('a');
+    element.setAttribute('href', `data:text/markdown;charset=utf-8,${encodeURIComponent(text)}`);
+    element.setAttribute('download', title);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  },
+  localSchema: (type, id) => {
+    const schema = JSON.parse(localStorage.getItem(type)) || []
+    if (schema.includes(id)) {
+      return true
+    }
+    if (schema.length >= 50) {
+      schema.shift()
+    }
+    schema.push(id)
+    localStorage.setItem(type, JSON.stringify(schema))
+    return false
   }
 }
 

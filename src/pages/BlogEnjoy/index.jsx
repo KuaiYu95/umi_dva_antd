@@ -4,6 +4,7 @@ import { Button, Icon, Tag, Divider, Pagination, Input, Select, message, Empty }
 import { Link } from 'umi';
 import { connect } from 'dva';
 import router from 'umi/router';
+import util from '@/utils/utils.js';
 import moment from 'moment';
 import styles from './index.less';
 
@@ -47,25 +48,28 @@ class BlogEnjoy extends React.Component {
     })
   }
 
-  onSearch = (value) => {
+  onSearch = value => {
     this.setState({ searchValue: value }, () => {
       this.getData()
     })
   }
 
-  handleSelectSort = (value) => {
+  handleSelectSort = value => {
     this.setState({ searchType: value }, () => {
       this.getData()
     })
   }
 
-  handleSearchSort = (value) => {
+  handleSearchSort = value => {
     this.setState({ searchSort: value }, () => {
       this.getData()
     })
   }
 
   toBlogDetail(_id) {
+    if (util.localSchema('blogViewSchema', _id)) {
+      return 
+    }
     this.props.dispatch({
       type: 'blog/queryAddBlogView',
       payload: { _id }
@@ -75,6 +79,9 @@ class BlogEnjoy extends React.Component {
   }
 
   handleClickLike(_id) {
+    if (util.localSchema('blogLikeSchema', _id)) {
+      return 
+    }
     this.props.dispatch({
       type: 'blog/queryAddBlogLike',
       payload: { _id }
@@ -83,7 +90,7 @@ class BlogEnjoy extends React.Component {
       this.state.blogList.forEach(it => {
         if (it._id === _id) {
           const { likeCount } = it
-          list.push({...it, likeCount: likeCount + 1})
+          list.push({ ...it, likeCount: likeCount + 1 })
         } else {
           list.push(it)
         }
@@ -115,26 +122,31 @@ class BlogEnjoy extends React.Component {
               <Link to={`/blog-enjoy/blog-detail?id=${item._id}`}>
                 <div className={styles.blogTitle} onClick={() => this.toBlogDetail(item._id)}>{item.title}</div>
               </Link>
-              <div className={styles.blogTags}>{item.typeIds.map(it => {
-                return it ? <span className={styles.blogTagsItem} key={it}><Tag color="#0D0806">{it}</Tag></span> : null
-              })}</div>
+              <div className={styles.blogTags}>
+                {item.typeIds.map(it => it ? <span className={styles.blogTagsItem} key={it}><Tag color="#0D0806">{it}</Tag></span> : null)}
+              </div>
             </div>
             <div className={styles.blogContent}>{item.text}</div>
             <div className={styles.blogFooter}>
               <div className={styles.blogStatistic}>
                 <span onClick={() => this.handleClickLike(item._id)}>
                   <Icon type="like" />
-                  <span className={styles.count}>{item.likeCount}</span>
+                  <span className={styles.count}>{item.likeCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
-                <span onClick={() => message.warning('开发中，尽情期待吧')}>
+                <span onClick={() => { message.info('请按 Ctrl+D 或者 Command+D 手动收藏!') }}>
                   <Icon type="star" />
-                  <span className={styles.count}>{item.collectCount}</span>
+                  <span className={styles.count}>{item.collectCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
-                <span onClick={() => message.warning('开发中，尽情期待吧')}>
+                <span onClick={() => router.push(`/blog-enjoy/blog-detail?id=${item._id}`)}>
                   <Icon type="message" />
-                  <span className={styles.count}>{item.commentCount}</span>
+                  <span className={styles.count}>{item.commentCount || 0}</span>
+                </span>
+                <Divider type="vertical" />
+                <span onClick={() => util.download(item.title, item.text)}>
+                  <Icon type="download" />
+                  <span className={styles.count}>{item.downLoadCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
                 <span>
