@@ -57,7 +57,7 @@ class PostBlog extends React.Component {
     const lastModifyTime = uploadTime
     const commentCount = 0
     const likeCount = 0
-    const collectCount = 0
+    const downloadCount = 0
     const viewCount = 0
     const typeIds = types.replace(/[ ]/g,"").replace(/，/g,",").split(',')
     if (title.trim() === '') {
@@ -69,7 +69,7 @@ class PostBlog extends React.Component {
     } else {
       this.props.dispatch({
         type: 'blog/queryAddBlog',
-        payload: { title: title.trim(), text, html, typeIds, uploadTime, lastModifyTime, commentCount, likeCount, collectCount, viewCount },
+        payload: { title: title.trim(), text, html, typeIds, uploadTime, lastModifyTime, commentCount, likeCount, downloadCount, viewCount },
       }).then(() => {
         const { success } = this.props.addBlogInfo
         if (success) {

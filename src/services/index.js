@@ -18,6 +18,14 @@ export async function queryAddBlogLike(params) {
   return request(`/api/add-blog-likeCount?${stringify(params.payload)}`);
 }
 
+export async function queryDecBlogLike(params) {
+  return request(`/api/dec-blog-likeCount?${stringify(params.payload)}`);
+}
+
+export async function queryBlogDownload(params) {
+  return request(`/api/download-blog?${stringify(params.payload)}`);
+}
+
 export async function queryDelBlog(params) {
   return request(`/api/del-blog?${stringify(params.payload)}`);
 }
@@ -46,4 +54,16 @@ export async function queryAddAtlas(params) {
     method: 'POST',
     data: { ...params.payload }
   });
+}
+
+// 评论
+export async function queryAddComment(params) {
+  return request('/api/add-comment', {
+    method: 'POST',
+    data: { ...params.payload }
+  });
+}
+
+export async function queryGetComment(params) {
+  return request(`/api/get-comment?${stringify(params.payload)}`);
 }

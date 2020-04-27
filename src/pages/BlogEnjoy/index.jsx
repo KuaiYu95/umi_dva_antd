@@ -78,29 +78,57 @@ class BlogEnjoy extends React.Component {
     })
   }
 
+  updateCount(_id, update, type) {
+    const list = []
+    this.state.blogList.forEach(it => {
+      if (it._id === _id) {
+        list.push({ ...it, [type]: it[type] + update })
+      } else {
+        list.push(it)
+      }
+    })
+    this.setState({ blogList: list })
+  }
+
   handleClickLike(_id) {
-    if (util.localSchema('blogLikeSchema', _id)) {
+    const flag = util.localSchema('blogLikeSchema', _id)
+    if (flag) {
+      this.props.dispatch({
+        type: 'blog/queryDecBlogLike',
+        payload: { _id }
+      }).then(() => {
+        this.updateCount(_id, -1, 'likeCount')
+      })
       return 
     }
     this.props.dispatch({
       type: 'blog/queryAddBlogLike',
       payload: { _id }
     }).then(() => {
-      const list = []
-      this.state.blogList.forEach(it => {
-        if (it._id === _id) {
-          const { likeCount } = it
-          list.push({ ...it, likeCount: likeCount + 1 })
-        } else {
-          list.push(it)
-        }
-      })
-      this.setState({ blogList: list })
+      this.updateCount(_id, 1, 'likeCount')
+    })
+  }
+
+  download = item => {
+    const { _id, title, text } = item
+    const flag = util.localSchema('blogDownloadSchema', _id)
+    util.download(title, text)
+    if (flag) {
+      return 
+    }
+    this.props.dispatch({
+      type: 'blog/queryBlogDownload',
+      payload: { _id }
+    }).then(() => {
+      this.updateCount(_id, 1, 'downloadCount')
     })
   }
 
   render() {
     const { loading, totalItems, searchSort, pageSize, blogList } = this.state
+    const blogDownloadSchema = localStorage.getItem('blogDownloadSchema')
+    const blogViewSchema = localStorage.getItem('blogViewSchema')
+    const blogLikeSchema = localStorage.getItem('blogLikeSchema')
     return (
       !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
         <div className={styles.tabLine}>
@@ -108,10 +136,10 @@ class BlogEnjoy extends React.Component {
           <Search placeholder="搜索" onSearch={this.onSearch} />
           <Select className={styles.selectSort} defaultValue={searchSort} onChange={this.handleSearchSort}>
             <Option value="0">最近更新 </Option>
-            <Option value="2">最多点赞 </Option>
-            <Option value="4">最多收藏 </Option>
-            <Option value="1">最多评论 </Option>
             <Option value="3">最多查看 </Option>
+            <Option value="1">最多评论 </Option>
+            <Option value="2">最多点赞 </Option>
+            <Option value="4">最多下载 </Option>
           </Select>
         </div>
         {(blogList.length > 0 ? blogList.map(item => {
@@ -130,13 +158,8 @@ class BlogEnjoy extends React.Component {
             <div className={styles.blogFooter}>
               <div className={styles.blogStatistic}>
                 <span onClick={() => this.handleClickLike(item._id)}>
-                  <Icon type="like" />
+                  {blogLikeSchema.includes(item._id) ? <Icon type="fire" theme="filled" /> : <Icon type="fire" />}
                   <span className={styles.count}>{item.likeCount || 0}</span>
-                </span>
-                <Divider type="vertical" />
-                <span onClick={() => { message.info('请按 Ctrl+D 或者 Command+D 手动收藏!') }}>
-                  <Icon type="star" />
-                  <span className={styles.count}>{item.collectCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
                 <span onClick={() => router.push(`/blog-enjoy/blog-detail?id=${item._id}`)}>
@@ -144,14 +167,18 @@ class BlogEnjoy extends React.Component {
                   <span className={styles.count}>{item.commentCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
-                <span onClick={() => util.download(item.title, item.text)}>
-                  <Icon type="download" />
-                  <span className={styles.count}>{item.downLoadCount || 0}</span>
+                <span onClick={() => this.download(item)}>
+                  {blogDownloadSchema.includes(item._id) ? <Icon type="save" theme="filled" /> : <Icon type="save" />}
+                  <span className={styles.count}>{item.downloadCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
                 <span>
-                  <Icon type="eye" />
+                  {blogViewSchema.includes(item._id) ? <Icon type="eye" theme="filled" /> : <Icon type="eye" />}
                   <span className={styles.count}>{item.viewCount}</span>
+                </span>
+                <Divider type="vertical" />
+                <span onClick={() => { message.info('请按 Ctrl+D 或者 Command+D 手动收藏!') }}>
+                  <Icon type="star" />
                 </span>
               </div>
               <div className={styles.blogTimestamp}>

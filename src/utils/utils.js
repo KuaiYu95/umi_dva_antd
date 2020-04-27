@@ -26,7 +26,12 @@ const util = {
   },
   localSchema: (type, id) => {
     const schema = JSON.parse(localStorage.getItem(type)) || []
-    if (schema.includes(id)) {
+    const idx = schema.indexOf(id)
+    if (idx > -1) {
+      if (type === 'blogLikeSchema') {
+        schema.splice(idx, 1)
+        localStorage.setItem(type, JSON.stringify(schema))
+      }
       return true
     }
     if (schema.length >= 50) {

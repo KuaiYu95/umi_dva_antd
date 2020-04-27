@@ -1,4 +1,14 @@
-import { queryGetBlog, queryGetBlogDetail, queryAddBlog, queryAddBlogView, queryAddBlogLike, queryDelBlog, queryUpdateBlog } from '@/services/index';
+import { 
+  queryGetBlog, 
+  queryGetBlogDetail, 
+  queryAddBlog, 
+  queryAddBlogView, 
+  queryAddBlogLike, 
+  queryDelBlog, 
+  queryUpdateBlog, 
+  queryDecBlogLike, 
+  queryBlogDownload
+} from '@/services/index';
 
 const BlogModel = {
   namespace: 'blog',
@@ -30,6 +40,20 @@ const BlogModel = {
         payload: response,
       });
     },
+    *queryBlogDownload(payload, { call, put }) {
+      const response = yield call(queryBlogDownload, payload);
+      yield put({
+        type: 'blogDownload',
+        payload: response,
+      });
+    },
+    *queryDecBlogLike(payload, { call, put }) {
+      const response = yield call(queryDecBlogLike, payload);
+      yield put({
+        type: 'getBlogLikeCount',
+        payload: response,
+      });
+    },
     *queryGetBlogDetail(payload, { call, put }) {
       const response = yield call(queryGetBlogDetail, payload);
       yield put({
@@ -37,7 +61,7 @@ const BlogModel = {
         payload: response,
       });
     },
-    *setBlogTitle(payload, { call, put }) {
+    *setBlogTitle(payload, { put }) {
       yield put({
         type: 'setTitle',
         data: payload.data,
@@ -73,14 +97,17 @@ const BlogModel = {
       return { ...state, blogDetail: action.payload || {}, blogTitle: action.payload ? action.payload.data.title : '' };
     },
     setTitle(state, action) {
-      const _state = JSON.parse(JSON.stringify(state));
-      _state.blogTitle = action.data
-      return _state
+      const newState = JSON.parse(JSON.stringify(state));
+      newState.blogTitle = action.data
+      return newState
     },
     addBlog(state, action) {
       return { ...state, addBlogInfo: action.payload || {} };
     },
     delBlog(state, action) {
+      return { ...state, blogDetail: action.payload || {} };
+    },
+    blogDownload(state, action) {
       return { ...state, blogDetail: action.payload || {} };
     },
     updateBlog(state, action) {
