@@ -176,11 +176,11 @@ class BlogDetail extends React.Component {
       </div>
     )
     const tagsBgc = ["magenta", "red", "volcano", "orange", "gold", "lime", "green", "cyan", "blue", "geekblue", "purple"]
-    const blogDownloadSchema = localStorage.getItem('blogDownloadSchema')
-    const blogViewSchema = localStorage.getItem('blogViewSchema')
-    const blogLikeSchema = localStorage.getItem('blogLikeSchema')
+    const blogDownloadSchema = localStorage.getItem('blogDownloadSchema') || []
+    const blogViewSchema = localStorage.getItem('blogViewSchema') || []
+    const blogLikeSchema = localStorage.getItem('blogLikeSchema') || []
     return (
-      !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
+      !loading ? <div className={styles.blog} id="blog" style={{ padding: '24px 0' }}>
         <div className={styles.blogCont}>
           <div className={styles.tags}>
             <span>标签：</span>

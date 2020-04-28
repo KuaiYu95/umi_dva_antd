@@ -1,11 +1,37 @@
+@import '~antd/es/style/themes/default.less';
+
 .moneyCont {
+  position: relative;
+  overflow: hidden;
   background-color: #fff;
   display: flex;
+  justify-content: space-around;
   div {
-    flex-grow: 1;
     text-align: center;
     img {
       height: 150px;
     }
+  }
+  .show {
+    position: absolute;
+    right: -25px;
+    top: 20px;
+    transform: rotate(45deg);
+    background-color: #0D0806;
+    color: #fff;
+    width: 110px;
+  }
+}
+
+
+@media only screen and (max-width: @screen-md) {
+  .show {
+    position: absolute;
+    right: -23px;
+    top: 2px;
+    transform: rotate(45deg);
+    background-color: #0D0806;
+    color: #fff;
+    width: 70px;
   }
 }

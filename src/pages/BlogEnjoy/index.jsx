@@ -126,9 +126,9 @@ class BlogEnjoy extends React.Component {
 
   render() {
     const { loading, totalItems, searchSort, pageSize, blogList } = this.state
-    const blogDownloadSchema = localStorage.getItem('blogDownloadSchema')
-    const blogViewSchema = localStorage.getItem('blogViewSchema')
-    const blogLikeSchema = localStorage.getItem('blogLikeSchema')
+    const blogDownloadSchema = localStorage.getItem('blogDownloadSchema') || []
+    const blogViewSchema = localStorage.getItem('blogViewSchema') || []
+    const blogLikeSchema = localStorage.getItem('blogLikeSchema') || []
     return (
       !loading ? <div className={styles.blog} style={{ padding: '24px 0' }}>
         <div className={styles.tabLine}>
@@ -162,7 +162,7 @@ class BlogEnjoy extends React.Component {
                   <span className={styles.count}>{item.likeCount || 0}</span>
                 </span>
                 <Divider type="vertical" />
-                <span onClick={() => router.push(`/blog-enjoy/blog-detail?id=${item._id}`)}>
+                <span onClick={() => router.push(`/blog-enjoy/blog-detail?id=${item._id}#comment`)}>
                   <Icon type="message" />
                   <span className={styles.count}>{item.commentCount || 0}</span>
                 </span>
