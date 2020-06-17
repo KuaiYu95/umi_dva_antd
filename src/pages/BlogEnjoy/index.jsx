@@ -198,7 +198,7 @@ class BlogEnjoy extends React.Component {
           showTotal={total => `共计 ${total} 条`}
           style={{ textAlign: 'right', margin: '24px auto' }}
         />}
-      </div> : <BlockLoading loading={loading} />
+      </div> : <BlockLoading loading={loading} text={'正在为你加载相关数据'} />
     )
   }
 }

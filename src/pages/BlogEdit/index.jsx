@@ -119,7 +119,7 @@ class BlogEdit extends React.Component {
         <div className={styles.writeBlog}>
           <MdEditor getValue={this.getValue} value={text} />
         </div>
-      </div> : <BlockLoading loading={loading} />
+      </div> : <BlockLoading loading={loading} text={'正在为你加载相关插件，可能需要一点时间'} />
     )
   }
 }
