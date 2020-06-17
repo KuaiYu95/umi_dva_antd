@@ -64,7 +64,7 @@ class BlogDetail extends React.Component {
             }
           })
         }
-      })
+      }).catch(() => this.setState({ loading: false }))
     })
   }
 
@@ -78,7 +78,7 @@ class BlogDetail extends React.Component {
         if (success) {
           this.setState({ commentList: data, loadingComment: false })
         }
-      })
+      }).catch(() => this.setState({ loadingComment: false }))
     })
   }
 
@@ -264,7 +264,7 @@ class BlogDetail extends React.Component {
             UP
           </div>
         </BackTop>
-      </div> : <BlockLoading loading={loading} />
+      </div> : <BlockLoading loading={loading} text={'正在为你加载相关插件，可能需要一点时间'} />
     );
   }
 };
